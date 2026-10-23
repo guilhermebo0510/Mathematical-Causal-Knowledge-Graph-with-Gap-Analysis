@@ -1,0 +1,67 @@
+{
+  "scope": "Consulta adicional para implementação desktop. Acesso a arquivos oficiais via raw.githubusercontent.com; sem benchmark de Tauri no Windows.",
+  "sources": [
+    {
+      "id": "tauri-sidecar",
+      "url": "https://raw.githubusercontent.com/tauri-apps/tauri-docs/v2/src/content/docs/develop/sidecar.mdx",
+      "status": 200,
+      "bytes": 8353,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "60c6579674b97a93fe6c53dde1713e8cd7bac0a95c1ade2c9411656512c1bccf"
+    },
+    {
+      "id": "tauri-prerequisites",
+      "url": "https://raw.githubusercontent.com/tauri-apps/tauri-docs/v2/src/content/docs/start/prerequisites.mdx",
+      "status": 200,
+      "bytes": 12901,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "2b72fc4fa86ff825e745c5371c97d4c314064f380af2882a80676cb49aa9a4fc"
+    },
+    {
+      "id": "tauri-python",
+      "url": "https://raw.githubusercontent.com/tauri-apps/tauri-docs/v2/src/content/docs/learn/sidecar.mdx",
+      "error": "HTTP Error 404: Not Found",
+      "accessed_on": "2026-10-23"
+    },
+    {
+      "id": "tauri-shell",
+      "url": "https://raw.githubusercontent.com/tauri-apps/plugins-workspace/v2/plugins/shell/src/lib.rs",
+      "status": 200,
+      "bytes": 6542,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "3a4a8ceed911b55e1a7c05b244259bf61f3f56d75543440ddc7068545663155a"
+    },
+    {
+      "id": "tauri-command",
+      "url": "https://raw.githubusercontent.com/tauri-apps/tauri-docs/v2/src/content/docs/develop/calling-rust.mdx",
+      "status": 200,
+      "bytes": 21508,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "5208fec8709507bd5a36b4debc4fbbe0f071666cb95dc5806b67d1255daa3628"
+    },
+    {
+      "id": "tauri-capabilities",
+      "url": "https://raw.githubusercontent.com/tauri-apps/tauri-docs/v2/src/content/docs/security/capabilities.mdx",
+      "status": 200,
+      "bytes": 7611,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "d8b2ca7f01dbc78c71c4a8e1e8212fc7ef52a3f5a060be5869a79739be7c6c5e"
+    },
+    {
+      "id": "pyinstaller",
+      "url": "https://raw.githubusercontent.com/pyinstaller/pyinstaller/develop/README.rst",
+      "status": 200,
+      "bytes": 5384,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "c6be1b0e62306f3f5da22f4131c3cf799e4234b86a1d6624a4be0e206a886aea"
+    },
+    {
+      "id": "cytoscape",
+      "url": "https://raw.githubusercontent.com/cytoscape/cytoscape.js/master/README.md",
+      "status": 200,
+      "bytes": 9814,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "d76cc17e7f9ca5ca5d5269376ff6445eb02ecfbd86aa17ea8318e99874979a72"
+    }
+  ]
+}

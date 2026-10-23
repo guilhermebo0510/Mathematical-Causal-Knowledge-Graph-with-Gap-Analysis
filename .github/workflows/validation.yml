@@ -1,0 +1,65 @@
+name: Validate engine and Windows desktop
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  engine-and-interface:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.23'
+      - run: uv sync --frozen
+      - run: npm ci
+      - run: uv run ruff check services scripts tests/engine
+      - run: uv run pytest -q
+      - run: npm run test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: '0.12.23'
+      - run: rustup show
+      - run: uv sync --frozen
+      - run: npm ci
+      - run: npm run engine:bundle
+      - run: uv run python scripts/smoke_sidecar.py
+      - name: Test Rust bridge against packaged Python
+        shell: pwsh
+        run: |
+          $targetTriple = rustc --print host-tuple
+          $env:KNOWLEDGE_ENGINE_BINARY = (Resolve-Path "apps/desktop/src-tauri/binaries/knowledge-engine-$targetTriple.exe").Path
+          cargo test --locked --manifest-path packages/desktop-bridge/Cargo.toml
+      - run: npm run desktop:build -- --bundles nsis
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nexo-windows-unsigned
+          path: apps/desktop/src-tauri/target/release/bundle/nsis/*.exe
+          if-no-files-found: error

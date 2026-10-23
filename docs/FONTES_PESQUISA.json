@@ -1,0 +1,331 @@
+{
+  "title": "Registro de pesquisa técnica inicial",
+  "date": "2026-10-23",
+  "method": "HTTPS via Python urllib; TLS verification enabled; HTML text extracted from accessible official repository pages.",
+  "limitations": [
+    "Direct documentation domains returned proxy 403; official GitHub repository pages were consulted instead.",
+    "No systematic literature review, market survey, benchmark or functional integration test was performed.",
+    "SHA-256 identifies transient extracted text; source snapshots are not bundled in the repository."
+  ],
+  "sources": [
+    {
+      "id": "sympy",
+      "url": "https://docs.sympy.org/latest/modules/solvers/solveset.html",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "pint",
+      "url": "https://pint.readthedocs.io/en/stable/getting/tutorial.html",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "lean",
+      "url": "https://lean-lang.org/theorem_proving_in_lean4/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "z3",
+      "url": "https://microsoft.github.io/z3guide/docs/logic/intro/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "networkx",
+      "url": "https://networkx.org/documentation/stable/reference/algorithms/dag.html",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "cytoscape",
+      "url": "https://js.cytoscape.org/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "fastapi",
+      "url": "https://fastapi.tiangolo.com/features/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "postgres",
+      "url": "https://www.postgresql.org/docs/current/datatype-json.html",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "neo4j",
+      "url": "https://neo4j.com/licensing/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "prov",
+      "url": "https://www.w3.org/TR/prov-o/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "openalex",
+      "url": "https://docs.openalex.org/how-to-use-the-api/api-overview",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "crossref",
+      "url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "pdg",
+      "url": "https://allofphysics.com/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "sciencestack",
+      "url": "https://sciencestack.ai/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "dowhy",
+      "url": "https://www.pywhy.org/dowhy/main/index.html",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "pysr",
+      "url": "https://ai.damtp.cam.ac.uk/pysr/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "grobid",
+      "url": "https://grobid.readthedocs.io/en/latest/Introduction/",
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>",
+      "accessed_on": "2026-10-23",
+      "scope": "Direct documentation access unsuccessful; not used as consulted evidence."
+    },
+    {
+      "id": "pgvector",
+      "url": "https://github.com/pgvector/pgvector",
+      "final_url": "https://github.com/pgvector/pgvector",
+      "status": 200,
+      "chars": 36948,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "1924bd783c4201f40264ee1a100487ff1a9fec80af2550a67fc77034fd6fc515",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "sympy-gh",
+      "url": "https://github.com/sympy/sympy",
+      "final_url": "https://github.com/sympy/sympy",
+      "status": 200,
+      "chars": 13331,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "b6dc735bfefd60e2194008eabaf1a92cd90e2610a42fb8ed69ca0abf61d7bfa3",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "pint-gh",
+      "url": "https://github.com/hgrecco/pint",
+      "final_url": "https://github.com/hgrecco/pint",
+      "status": 200,
+      "chars": 7521,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "a8fcf8c9a4a74f1621516cd6917ce9aeb219f985b91cfa863f817d11259762c8",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "lean-gh",
+      "url": "https://github.com/leanprover/lean4",
+      "final_url": "https://github.com/leanprover/lean4",
+      "status": 200,
+      "chars": 4245,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "83c448454b54f0c72e40b08ebe0968917e6f5c0bc07a36d2e6d6438d1c73f3b4",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "mathlib-gh",
+      "url": "https://github.com/leanprover-community/mathlib4",
+      "final_url": "https://github.com/leanprover-community/mathlib4",
+      "status": 200,
+      "chars": 10718,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "e345d4e440f44c28fce5166554cde96f8f0cd30fdbbdb81f8b54a6c1d1da9761",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "z3-gh",
+      "url": "https://github.com/Z3Prover/z3",
+      "final_url": "https://github.com/Z3Prover/z3",
+      "status": 200,
+      "chars": 11207,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "350998fc372b6cf1cf25fadc285006fd546a84d7c9b78ac66135958cbbf45e8a",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "networkx-gh",
+      "url": "https://github.com/networkx/networkx",
+      "final_url": "https://github.com/networkx/networkx",
+      "status": 200,
+      "chars": 5736,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "65ce4c85e9d3647ab588fbc252af212f10d7df2d0f909bfd73b7c7579ed1ef02",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "cytoscape-gh",
+      "url": "https://github.com/cytoscape/cytoscape.js",
+      "final_url": "https://github.com/cytoscape/cytoscape.js",
+      "status": 200,
+      "chars": 11118,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "030247095ff26f01a74f8917352ccf33f037b1199e332e24b285abe5c5631b23",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "fastapi-gh",
+      "url": "https://github.com/fastapi/fastapi",
+      "final_url": "https://github.com/fastapi/fastapi",
+      "status": 200,
+      "chars": 17592,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "037161c8cf3e5b518a9fc4f19c40f9d746873b2d00dab256c5491f607b549222",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "pydantic-gh",
+      "url": "https://github.com/pydantic/pydantic",
+      "final_url": "https://github.com/pydantic/pydantic",
+      "status": 200,
+      "chars": 6178,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "d0b22fd59258f6c818d0953c187b901276e54676ff6155693aa331206b301846",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "postgres-gh",
+      "url": "https://github.com/postgres/postgres",
+      "final_url": "https://github.com/postgres/postgres",
+      "status": 200,
+      "chars": 5276,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "2f04441dc849faa97a69ba9ddb989771d5448084d71373dd3888cfb191c1d742",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "neo4j-gh",
+      "url": "https://github.com/neo4j/neo4j",
+      "final_url": "https://github.com/neo4j/neo4j",
+      "status": 200,
+      "chars": 7245,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "25f590baa948d19f6c57eb6c4accbc9d24869b4fe0aa328b7e5466264aa983d2",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "prov-gh",
+      "url": "https://github.com/w3c/prov",
+      "final_url": "https://github.com/w3c/prov",
+      "status": 200,
+      "chars": 3533,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "85ccf69f99f454a50808b74420863eb0adb72b4df21007fd8573dc3dee1684cb",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "openalex-gh",
+      "url": "https://github.com/ourresearch/openalex-docs",
+      "final_url": "https://github.com/ourresearch/openalex-docs",
+      "status": 200,
+      "chars": 6680,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "da4cebeed5f6c66178be37ced71e085662c421ff344c7932a4f01d20556afe82",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "crossref-gh",
+      "url": "https://github.com/CrossRef/rest-api-doc",
+      "final_url": "https://github.com/CrossRef/rest-api-doc",
+      "status": 200,
+      "chars": 43188,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "b7f1f9714ac25b1652d2bc807d5b68604d77cf1ff5f019cf2c31db87ee7a4b6e",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "pdg-gh",
+      "url": "https://github.com/allofphysicsgraph/proofofconcept",
+      "final_url": "https://github.com/allofphysicsgraph/proofofconcept",
+      "status": 200,
+      "chars": 6714,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "cb6c2c5b46cc4185b17d64da607865d377e64894f22f6604f690f48fc0dcd443",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "dowhy-gh",
+      "url": "https://github.com/py-why/dowhy",
+      "final_url": "https://github.com/py-why/dowhy",
+      "status": 200,
+      "chars": 16691,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "01a1c957561b0e85b98c4764a1dc4c49da6ef1bcd83e90753eec885ac5bf4e8d",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "pysr-gh",
+      "url": "https://github.com/MilesCranmer/PySR",
+      "final_url": "https://github.com/astroautomata/PySR",
+      "status": 200,
+      "chars": 15678,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "18774081a6fff81abbcdd0f7dec57591af9c670ea75a472583891ab019f938bc",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "grobid-gh",
+      "url": "https://github.com/kermitt2/grobid",
+      "final_url": "https://github.com/grobidOrg/grobid",
+      "status": 200,
+      "chars": 16703,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "aa088ad38d5e86cf9a68178dc25963b83938ce48535e03b0392914e44ffc5741",
+      "scope": "Repository page and README text; no functional integration tested."
+    },
+    {
+      "id": "reactflow-gh",
+      "url": "https://github.com/xyflow/xyflow",
+      "final_url": "https://github.com/xyflow/xyflow",
+      "status": 200,
+      "chars": 8515,
+      "accessed_on": "2026-10-23",
+      "extracted_text_sha256": "b2349c19c32e0a2144a780f02957180f016743b2eb2d1ebb4ac251b8619e6545",
+      "scope": "Repository page and README text; no functional integration tested."
+    }
+  ]
+}

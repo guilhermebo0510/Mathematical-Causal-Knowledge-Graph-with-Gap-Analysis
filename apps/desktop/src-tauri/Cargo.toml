@@ -1,0 +1,15 @@
+[package]
+name = "knowledge-desktop"
+version = "0.1.0"
+description = "Local mathematical knowledge laboratory"
+edition = "2021"
+rust-version = "1.88"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde_json = "1"
+tokio = { version = "1", features = ["sync"] }
+knowledge-bridge = { path = "../../../packages/desktop-bridge" }
