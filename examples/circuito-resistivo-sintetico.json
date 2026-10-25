@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "id": "resistive_synthetic",
+  "title": "Circuito resistivo sintético",
+  "description": "Controle didático estipulado: corrente contínua e resistência constantes, V = I * R e P = V * I. Não é medição, simulação de circuito geral ou prova física. Revisar domínio, fontes e hipóteses antes de uso real.",
+  "variables": [
+    {"id":"I","label":"Corrente","unit":"A","value":2,"source":"Entrada sintética estipulada: 2 A."},
+    {"id":"R","label":"Resistência","unit":"ohm","value":3,"source":"Entrada sintética estipulada: 3 ohm."},
+    {"id":"V","label":"Tensão","unit":"V","value":null,"source":null},
+    {"id":"P","label":"Potência","unit":"W","value":null,"source":null}
+  ],
+  "equations": [
+    {"id":"eq_voltage","label":"Tensão: I * R","lhs":"V","rhs":{"var":null,"op":"mul","args":[{"var":"I","op":null,"args":[]},{"var":"R","op":null,"args":[]}]},"assumption_ids":["steady"],"source":"Relação estipulada no controle didático V = I * R."},
+    {"id":"eq_power","label":"Potência: V * I","lhs":"P","rhs":{"var":null,"op":"mul","args":[{"var":"V","op":null,"args":[]},{"var":"I","op":null,"args":[]}]},"assumption_ids":["steady"],"source":"Relação estipulada no controle didático P = V * I."}
+  ],
+  "assumptions": [{"id":"steady","label":"Regime resistivo constante","justification":"Corrente contínua, resistência constante e ausência de dinâmica reativa no controle sintético."}],
+  "requirements": [
+    {"id":"req_voltage","label":"Calcular tensão","equation_id":"eq_voltage","exclusion_reason":null},
+    {"id":"req_power","label":"Calcular potência","equation_id":"eq_power","exclusion_reason":null}
+  ],
+  "observations": [
+    {"id":"obs_voltage","label":"Referência sintética de tensão","variable_id":"V","value":6,"unit":"V","tolerance":0.01,"source":"Referência aritmética estipulada: 2 * 3 = 6 V; não medida."},
+    {"id":"obs_power","label":"Referência sintética de potência","variable_id":"P","value":12,"unit":"W","tolerance":0.01,"source":"Referência aritmética estipulada: 6 * 2 = 12 W; não medida."}
+  ]
+}

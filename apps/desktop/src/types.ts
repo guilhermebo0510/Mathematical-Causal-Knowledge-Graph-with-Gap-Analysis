@@ -48,10 +48,12 @@ export interface GraphNode {
   id: string;
   label: string;
   kind: Kind;
+  group?: {id:string;members:string[]};
 }
 export interface Graph {
+  preserveIds?:string[];
   nodes: GraphNode[];
-  edges: { id: string; source: string; target: string; relation: string }[];
+  edges: { id: string; source: string; target: string; relation: string; bundle?:string[] }[];
 }
 export interface LoadedModel {
   model: Model;

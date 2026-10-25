@@ -192,6 +192,7 @@ def test_json_lines_transport_keeps_stdout_machine_readable():
         [sys.executable, "-m", "knowledge_engine.protocol"],
         input="\n".join(json.dumps(line) for line in lines) + "\n",
         text=True,
+        encoding="utf-8",
         capture_output=True,
         check=True,
         timeout=15,

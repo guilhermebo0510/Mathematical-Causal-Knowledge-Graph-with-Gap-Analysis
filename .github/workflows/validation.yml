@@ -23,10 +23,13 @@ jobs:
       - uses: astral-sh/setup-uv@v6
         with:
           version: '0.12.23'
+      - run: rustup show
+      - run: cargo test --locked --manifest-path packages/viewport-core/Cargo.toml
+      - run: npm run viewport:build
       - run: uv sync --frozen
       - run: npm ci
       - run: uv run ruff check services scripts tests/engine
-      - run: uv run pytest -q
+      - run: uv run --extra mcp pytest -q
       - run: npm run test
       - run: npm run build
       - run: npx playwright install --with-deps chromium
@@ -47,6 +50,8 @@ jobs:
         with:
           version: '0.12.23'
       - run: rustup show
+      - run: cargo test --locked --manifest-path packages/viewport-core/Cargo.toml
+      - run: npm run viewport:build
       - run: uv sync --frozen
       - run: npm ci
       - run: npm run engine:bundle
@@ -57,6 +62,8 @@ jobs:
           $targetTriple = rustc --print host-tuple
           $env:KNOWLEDGE_ENGINE_BINARY = (Resolve-Path "apps/desktop/src-tauri/binaries/knowledge-engine-$targetTriple.exe").Path
           cargo test --locked --manifest-path packages/desktop-bridge/Cargo.toml
+      - name: Test native project file persistence
+        run: cargo test --locked --manifest-path apps/desktop/src-tauri/Cargo.toml
       - run: npm run desktop:build -- --bundles nsis
       - uses: actions/upload-artifact@v4
         with:

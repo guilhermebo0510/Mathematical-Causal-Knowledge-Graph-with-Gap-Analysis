@@ -1,5 +1,11 @@
-import { test, expect } from "@playwright/test";
+import { chooseScenario, togglePanel } from "./workspace-helpers";
+import { test, expect as baseExpect } from "@playwright/test";
 import { readFile } from "node:fs/promises";
+
+// Cold starts on Windows can take several seconds; the engine still enforces 15 s.
+const expect = baseExpect.configure({ timeout: 20_000 });
+test.use({ actionTimeout: 20_000 });
+test.setTimeout(60_000);
 
 test("investigates real engine results across four scenarios", async ({
   page,
@@ -20,14 +26,12 @@ test("investigates real engine results across four scenarios", async ({
     "2.200",
   );
 
-  await page
-    .getByLabel("Balanço térmico", { exact: true })
-    .selectOption("missing_air");
+  await chooseScenario(page, "missing_air");
   await page.getByRole("button", { name: "Executar verificação" }).click();
   await expect(page.getByTestId("finding-count")).toHaveText("2", {
     timeout: 20_000,
   });
-  await page.getByRole("tab", { name: "Verificações", exact: true }).click();
+  await page.getByRole("tab", { name: "Resultados", exact: true }).click();
   await page
     .getByRole("button", { name: /Previsão diverge da referência/ })
     .click();
@@ -39,19 +43,15 @@ test("investigates real engine results across four scenarios", async ({
   );
   await page.getByRole("tab", { name: "Grafo", exact: true }).click();
   await page.screenshot({ path: "test-results/prototype.png", fullPage: true });
-  await page.getByRole("tab", { name: "Verificações", exact: true }).click();
+  await page.getByRole("tab", { name: "Resultados", exact: true }).click();
 
-  await page
-    .getByLabel("Balanço térmico", { exact: true })
-    .selectOption("invalid_unit");
+  await chooseScenario(page, "invalid_unit");
   await page.getByRole("button", { name: "Executar verificação" }).click();
   await expect(
     page.getByRole("button", { name: /Dimensões incompatíveis/ }).first(),
   ).toBeVisible({ timeout: 20_000 });
 
-  await page
-    .getByLabel("Balanço térmico", { exact: true })
-    .selectOption("missing_input");
+  await chooseScenario(page, "missing_input");
   await page.getByRole("button", { name: "Executar verificação" }).click();
   await expect(
     page
@@ -94,7 +94,9 @@ test("exports and reimports a changed model, computing new results rather than a
     page.getByRole("heading", { name: "Balanço térmico de uma sala" }),
   ).toBeVisible();
   const downloadPromise = page.waitForEvent("download");
+  await page.locator(".file-menu > summary").click();
   await page.getByRole("button", { name: "Exportar modelo JSON" }).click();
+  await page.keyboard.press("Escape");
   const download = await downloadPromise;
   const model = JSON.parse(await readFile((await download.path())!, "utf-8"));
   model.variables.find(

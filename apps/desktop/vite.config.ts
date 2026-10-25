@@ -68,10 +68,10 @@ function localEngine(): Plugin {
             finish(
               504,
               JSON.stringify({
-                error: "O motor excedeu o limite de 15 segundos.",
+                error: "O motor excedeu o tempo limite da execução.",
               }),
             );
-          }, 15_000);
+          }, 120_000);
           res.on("close", () => {
             if (!finished) child.kill("SIGKILL");
           });

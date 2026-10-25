@@ -8,9 +8,9 @@ Construir um aplicativo desktop com interface gráfica desde o primeiro protóti
 
 A arquitetura terá um núcleo comum e módulos de domínio. O primeiro domínio será um problema físico delimitado de balanço térmico em um edifício. Depois, o mesmo núcleo poderá receber verificadores para software, engenharia e outras ciências. A extensibilidade será testada com um segundo exemplo pequeno de rastreabilidade de requisitos de software, antes de considerar o núcleo suficientemente geral.
 
-Direção acordada com o usuário: **Tauri com Rust** para o aplicativo desktop, **React + TypeScript + Vite + Cytoscape.js + KaTeX** para a interface e **Python 3.12 + Pydantic + SymPy + Pint + NetworkX** para o motor. A CLI será opcional. Recomenda-se SQLite para a persistência embarcada do piloto e PostgreSQL/FastAPI para a futura execução online; essas escolhas de armazenamento e transporte ainda precisam de prova técnica. Usar um núcleo modular, com análises matemáticas executadas em processos isolados. Z3, Lean, DoWhy, busca científica e regressão simbólica entram em etapas posteriores, conforme a necessidade demonstrada.
+Direção acordada com o usuário: **Tauri com Rust** para o aplicativo desktop, **React + TypeScript + Vite + KaTeX** para os painéis e barras da interface, **Rust compilado para WebAssembly + WebGL2 na GPU (`packages/viewport-core`)** para o viewport e toda a representação de nós, portas, ligações e gráficos internos, e **Python 3.12 + Pydantic + SymPy + Pint + NetworkX** para o motor. A CLI será opcional. Recomenda-se SQLite para a persistência embarcada do piloto e PostgreSQL/FastAPI para a futura execução online; essas escolhas de armazenamento e transporte ainda precisam de prova técnica. Usar um núcleo modular, com análises matemáticas executadas em processos isolados. Z3, Lean, DoWhy, busca científica e regressão simbólica entram em etapas posteriores, conforme a necessidade demonstrada.
 
-Não haverá reescrita preventiva do motor em Rust. A visualização será renderizada na WebView por Cytoscape.js; Python calculará relações e análises. Partes específicas poderão ser implementadas em Rust quando medições demonstrarem uma vantagem relevante, considerando também o custo de comunicação e manutenção.
+> **Nota de mudança de arquitetura do viewport (23/10/2026):** Inicialmente a visualização no viewport usava Cytoscape.js com sobreposição de cartões em HTML/DOM. Para garantir uma arquitetura mais robusta e evitar lag severo quando o viewport tiver centenas ou milhares de nós, toda a representação interna do viewport (layout por dependências, nós, portas estruturadas de entrada/saída/hipótese/requisito/validação, roteamento de ligações curvas e gráficos analíticos embutidos nos nós) passou a ser construída em **Rust e renderizada diretamente na placa de vídeo via WebAssembly + WebGL2**, sem elementos DOM/SVG por nó. Painéis e barras de ferramentas permanecem em React/TypeScript, e o motor científico permanece em Python.
 
 O primeiro resultado demonstrável será um aplicativo gráfico com um grafo executável que encontra falhas introduzidas de propósito e apresenta a regra aplicada, a evidência, os limites da conclusão e um próximo passo de investigação. Não haverá promessa de descobrir novas leis ou de detectar todas as lacunas de qualquer área.
 
@@ -63,7 +63,7 @@ Toda regra terá pré-condições e poderá responder `inconclusivo`, `não apli
 
 ```mermaid
 flowchart TD
-    UI[Interface React e Cytoscape.js na WebView] --> HOST[Tauri e Rust: comandos e permissões]
+    UI["Painéis React + Viewport Rust/WASM/WebGL2 (GPU)"] --> HOST[Tauri e Rust: comandos e permissões]
     HOST --> IPC[Protocolo local versionado]
     IPC --> CORE[Motor Python: contratos, revisões e plugins]
     CORE --> DB[(SQLite local: proposta para o piloto)]
@@ -86,15 +86,15 @@ O fluxo principal será: criar ou importar um modelo → revisar suas relações
 
 ## 6. Stack e decisões
 
-| Camada | Escolha inicial | Motivo | Alternativa e condição de reconsideração |
+| Camada | Escolha atual | Motivo | Histórico / Alternativa |
 | --- | --- | --- | --- |
 | Aplicativo desktop | Tauri com Rust | Janela, permissões e ciclo de vida do motor local | Validar empacotamento e WebView no sistema escolhido |
 | Motor | Python 3.12 e Pydantic [14] | Ecossistema científico e contratos tipados | FastAPI [13] como adaptador para futura versão online |
 | Matemática | SymPy e Pint | Álgebra e unidades no mesmo ecossistema | Adaptadores para outros solvers quando um caso documentado exigir |
 | Grafos em memória | NetworkX `MultiDiGraph` | Várias relações tipadas entre os mesmos nós e algoritmos disponíveis | Avaliar alternativas se volume ou latência ultrapassarem os critérios do piloto |
 | Persistência | SQLite embarcado, SQLAlchemy e migrações: proposta a validar | Projetos locais sem instalar um serviço de banco | PostgreSQL no modo online; Neo4j apenas se consultas de grafos justificarem |
-| Frontend | React, TypeScript e Vite na WebView Tauri | Interface gráfica desde o primeiro protótipo, reaproveitável na web | Separar acessos ao sistema de arquivos dos componentes visuais |
-| Visualização | Cytoscape.js [15] | Foco em exploração e análise de redes, filtros e estilos | React Flow [16] se a edição de blocos com controles complexos dominar o produto |
+| Frontend (painéis e barras) | React, TypeScript e Vite na WebView Tauri | Painéis, barras de ferramentas, busca e inspetor fora do viewport | Separar acessos ao sistema de arquivos dos componentes visuais |
+| Viewport, nós e ligações (GPU) | Rust + WebAssembly + WebGL2 (`packages/viewport-core`) | Arquitetura mais robusta: nós, portas tipadas (`E`, `S`, `HIP`, `REQ`, `VAL`), curvas roteadas e gráficos internos desenhados direto na placa de vídeo para suportar centenas/milhares de nós sem lag | Substituiu a escolha inicial de Cytoscape.js [15] + cartões DOM/SVG em 23/10/2026 |
 | Equações | KaTeX, com configuração restritiva | Exibição de matemática no painel de detalhes | MathJax se requisitos de notação ou acessibilidade justificarem a troca |
 | Estado de interface | Estado local React; TanStack Query quando necessário | Sincronização de consultas e tarefas pelo adaptador de transporte | Acrescentar store global apenas para fluxos que precisarem |
 | Qualidade | pytest, Hypothesis, Ruff, verificação de tipos e Vitest; automação de UI a validar | Regressão científica, contratos e fluxo visual | Playwright para interface web; verificar suporte de automação da WebView Tauri por sistema |
@@ -111,9 +111,9 @@ PostgreSQL permanece recomendado para colaboração e execução online, com tra
 
 Neo4j é uma alternativa válida para travessias complexas. Contudo, não é um requisito inerente ao conceito e adiciona outra decisão operacional. Seu repositório distingue Community sob GPLv3 e Enterprise com licença comercial [18]; qualquer adoção deve considerar os componentes e a forma de distribuição efetivamente usados, sem inferir obrigações jurídicas apenas desta descrição.
 
-### Por que Cytoscape.js primeiro?
+### Evolução da visualização: de Cytoscape.js para Rust + WebAssembly + WebGL2 na GPU
 
-A tarefa principal é investigar redes de conhecimento e selecionar subgrafos. Cytoscape.js se apresenta como biblioteca de teoria de grafos com renderização interativa [15]. React Flow é orientado a interfaces baseadas em nós e permanece uma alternativa forte para edição [16]. A escolha deverá ser confirmada em uma pequena prova com o mesmo conjunto de dados, medindo legibilidade, seleção, navegação e manutenção da interface. Não há benchmark comparativo realizado neste relatório.
+Na proposta inicial deste relatório, Cytoscape.js [15] foi escolhido para o primeiro protótipo, complementado depois por cartões HTML/DOM sobrepostos ao canvas. Em 23/10/2026, o usuário revisou essa decisão de stack: embora painéis e barras de ferramentas funcionem bem em React/HTML, renderizar nós, ligações e gráficos internos em DOM/SVG ou JS convencional gera lag perceptível com centenas de nós e torna-se inviável com milhares, além de não organizar adequadamente as portas de entrada, saída e estados. Por isso, o viewport e toda a sua representação interna (nós, portas tipadas, curvas Bézier roteadas e gráficos analíticos embutidos) foram migrados para **Rust (`packages/viewport-core`) compilado para WebAssembly e renderizado na placa de vídeo via WebGL2**.
 
 ## 7. Modelo de conhecimento
 
@@ -338,12 +338,12 @@ A seleção privilegia componentes abertos, mas uma lista de dependências não 
 | Confundir grafo incompleto com descoberta científica | Contratos de cobertura, achados relativos ao escopo e revisão de hipóteses |
 | IA produzir ligação plausível sem evidência | Propostas rastreáveis e separadas de resultados de verificadores |
 | Equações equivalentes visualmente terem significados distintos | AST, identidade de variáveis, domínio, unidades e hipóteses explícitas |
-| Explosão de custo simbólico e visual | Limites, subgrafos, cache por revisão e execução isolada |
+| Explosão de custo simbólico e visual | Limites, subgrafos, cache por revisão, execução isolada e viewport Rust/WASM/WebGL2 na GPU |
 | Interface visual esconder a justificativa | Painel de evidências e alternativa textual/tabelada |
 | Integração científica depender de API instável | Adaptadores, cache, validação de autenticação/cotas e importação local independente |
 | Regras refletirem erros do próprio modelo de domínio | Revisão especializada e avaliação com controles e casos fora da amostra |
 
-Direção acordada com o usuário: aplicativo desktop em Tauri/Rust, interface React/TypeScript com Cytoscape.js e motor Python; interface gráfica desde o primeiro protótipo; otimizações pontuais em Rust apenas após medir gargalos. CLI e execução online serão complementares. Recomendações ainda a validar: SQLite no desktop, protocolo local, estratégia de empacotamento e primeiro sistema-alvo. Permanecem o núcleo modular, matemática estruturada, IA opcional e o caso térmico didático proposto.
+Direção acordada com o usuário: aplicativo desktop em Tauri/Rust, painéis e barras em React/TypeScript, **viewport e nós construídos em Rust (WebAssembly + WebGL2 na GPU)** e motor científico em Python; interface gráfica desde o primeiro protótipo; otimizações adicionais no motor científico em Rust apenas após medir gargalos. CLI e execução online serão complementares. Recomendações ainda a validar: SQLite no desktop, protocolo local, estratégia de empacotamento e primeiro sistema-alvo. Permanecem o núcleo modular, matemática estruturada, IA opcional e o caso térmico didático proposto.
 
 Questões para refinar durante a fase 0, sem impedir o protótipo: público prioritário; disponibilidade de especialista e dados reais; formato de colaboração entre usuários; restrições de implantação; política de privacidade; requisitos de escala; licença do projeto; necessidade de exportação RDF/PROV; e o conjunto de relações causais efetivamente suportado. Além da direção desktop e das linguagens acordadas, as escolhas detalhadas deste relatório permanecem recomendações técnicas a validar.
 
@@ -378,8 +378,8 @@ As escolhas adicionais de ferramentas de UI, testes, ORM e empacotamento são re
 
 Separar quatro custos antes de otimizar: análise em Python, serialização e transferência de dados, cálculo do layout e renderização/interação na WebView. Medir duração, memória, tamanho das mensagens e responsividade em projetos representativos. Um motor Python mais rápido não resolve automaticamente um gargalo de desenho em JavaScript.
 
-Primeiras medidas: carregar apenas subgrafos relevantes, enviar atualizações incrementais, evitar recomputações e mover cálculos de layout demorados para workers quando suportado. Preservar os contratos científicos e medir cada mudança com o mesmo conjunto de dados.
+**Atualização de 23/10/2026 (Viewport e nós em Rust + GPU):** Para o cálculo de layout, construção dos nós, portas estruturadas, roteamento de curvas e renderização do viewport, a decisão arquitetural foi consolidada em **Rust compilado para WebAssembly com renderização WebGL2 na GPU (`packages/viewport-core`)**, eliminando elementos DOM/SVG por nó para garantir fluidez com centenas ou milhares de nós.
 
-Se um gargalo persistir, avaliar uma implementação específica em Rust: algoritmo de grafo, processamento de arquivos ou cálculo de layout. O mecanismo de integração — comando Tauri, extensão Python via PyO3 ou WebAssembly — dependerá de onde a computação ocorre. Comparar custo total, incluindo cópias, conversões, empacotamento e manutenção; validar equivalência de resultados antes de substituir o componente. Não há port ou ganho de desempenho demonstrado nesta etapa.
+Para o motor científico (Python), permanecem as medidas de subgrafos relevantes, atualizações incrementais e avaliação pontual em Rust (via comando Tauri, PyO3 ou WASM) apenas se um algoritmo matemático ou de arquivo específico demonstrar gargalo medido.
 
 Esta revisão registra a decisão de produto discutida com o usuário. Tauri, SQLite e os mecanismos de integração Rust/Python não fizeram parte da pesquisa original de 20 fontes, e sua compatibilidade deverá ser consultada e experimentada na fase 0.

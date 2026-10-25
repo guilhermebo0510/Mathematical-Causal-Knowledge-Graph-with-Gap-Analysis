@@ -14,7 +14,7 @@ export default defineConfig({
   webServer: {
     command: "npm run dev",
     url: "http://127.0.0.1:1420",
-    reuseExistingServer: false,
+    reuseExistingServer: process.env.NEXO_REUSE_DEV_SERVER === "1",
     timeout: 30_000,
   },
 });

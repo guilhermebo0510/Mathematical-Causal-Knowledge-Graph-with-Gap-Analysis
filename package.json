@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "desktop:dev": "npm run tauri --workspace apps/desktop -- dev",
     "desktop:build": "npm run tauri --workspace apps/desktop -- build",
+    "viewport:build": "node scripts/build_viewport_wasm.mjs",
     "engine:bundle": "uv run python scripts/bundle_engine.py"
   },
   "devDependencies": {
