@@ -24,6 +24,12 @@ Fila, aceites e roteiro de projetos: [EVOLUCAO_CONTINUA.md](EVOLUCAO_CONTINUA.md
 
 ### Consolidação autorizada para GitHub (25/10)
 
+- Commit de consolidação local a05b669 criado. Primeiro push recusado pelo GitHub:
+  credencial OAuth não tem escopo workflow para alterar .github/workflows/validation.yml.
+  Autorização interativa iniciada com gh auth refresh --hostname github.com --scopes
+  workflow; conclusão depende do usuário no GitHub. Não remover o workflow nem forçar
+  envio para ocultar a pendência. Retomar push após autenticação e conferir SHA remoto.
+
 - Hook excluído com confirmação do aplicativo, por pedido explícito do usuário.
   Trabalho consolidado no checkout existente/main para commit e envio a origin.
 - Conferência antes do commit: Python completo54/54 (44,09 s), host Rust31/31
