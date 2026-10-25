@@ -26,9 +26,10 @@ Fila, aceites e roteiro de projetos: [EVOLUCAO_CONTINUA.md](EVOLUCAO_CONTINUA.md
 
 - Commit de consolidação local a05b669 criado. Primeiro push recusado pelo GitHub:
   credencial OAuth não tem escopo workflow para alterar .github/workflows/validation.yml.
-  Autorização interativa iniciada com gh auth refresh --hostname github.com --scopes
-  workflow; conclusão depende do usuário no GitHub. Não remover o workflow nem forçar
-  envio para ocultar a pendência. Retomar push após autenticação e conferir SHA remoto.
+  Autorização interativa concluída pelo usuário com escopo workflow. Push para
+  origin/main confirmado, incluindo consolidação a05b669 e registro4809af8; SHA remoto
+  conferido igual ao HEAD local após o envio. Hook permanece excluído. Retomada futura
+  é manual; validações pendentes de distribuição continuam registradas abaixo.
 
 - Hook excluído com confirmação do aplicativo, por pedido explícito do usuário.
   Trabalho consolidado no checkout existente/main para commit e envio a origin.
